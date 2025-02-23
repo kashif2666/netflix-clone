@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuthStore } from "../store/authUser";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { login } = useAuthStore();
+
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log(email, password);
+    login({ email, password });
   };
 
   return (
@@ -21,7 +24,7 @@ const LoginPage = () => {
       <div className="flex justify-center items-center mt-20 mx-3">
         <div className="w-full max-w-md p-8 space-y-6 bg-black/60 rounded-lg shadow-md">
           <h1 className="text-center text-white text-2xl font-bold mb-4">
-            Sign Up
+            Login
           </h1>
 
           <form className="space-y-4" onSubmit={handleLogin}>
@@ -59,13 +62,13 @@ const LoginPage = () => {
               />
             </div>
             <button className="w-full py-2 text-white bg-red-600 font-semibold rounded-md hover:bg-red-700">
-              Sign Up
+              Login
             </button>
           </form>
           <div className="text-center text-gray-400">
             Don't have an account?{" "}
             <Link to={"/signup"} className="text-red-500 hover:underline">
-              Login
+              Sign Up
             </Link>
           </div>
         </div>
